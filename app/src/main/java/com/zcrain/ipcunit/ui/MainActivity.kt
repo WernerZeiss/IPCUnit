@@ -1,9 +1,10 @@
-package com.zcrain.ipcunit
+package com.zcrain.ipcunit.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import com.zcrain.ipcunit.R
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
