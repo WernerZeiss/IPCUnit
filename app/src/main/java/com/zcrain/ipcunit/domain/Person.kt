@@ -34,4 +34,8 @@ class Person(var name: String?, var age: Int) : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return "Person:name$name,age:$age"
+    }
 }

@@ -1,5 +1,6 @@
 package com.zcrain.ipcunit.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,9 +23,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.tv_intent -> Unit
-            R.id.tv_files -> Unit
-            R.id.tv_messenger -> Unit
+            R.id.tv_intent -> startActivity(Intent(this, IntentOneActivity::class.java))
+            R.id.tv_files -> startActivity(Intent(this, FileOneActivity::class.java))
+            R.id.tv_messenger -> startActivity(Intent(this, MessengerClientActivity::class.java))
             R.id.tv_aidl -> Unit
             R.id.tv_provider -> Unit
             R.id.tv_socket -> Unit

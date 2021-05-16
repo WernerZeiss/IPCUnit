@@ -17,8 +17,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.IntentOneActivity"/>
-        <activity android:name=".ui.IntentTwoActivity"/>
+        <activity android:name=".ui.IntentOneActivity" />
+        <activity
+            android:name=".ui.IntentTwoActivity"
+            android:process=":intentTwo" />
+        <activity android:name=".ui.FileOneActivity" />
+        <activity
+            android:name=".ui.FileTwoActivity"
+            android:process=":fileTwo" />
+        <activity android:name=".ui.MessengerClientActivity" />
+
+        <service
+            android:name=".service.MessengerService"
+            android:process=":MessengerService" />
     </application>
 
 </manifest>
