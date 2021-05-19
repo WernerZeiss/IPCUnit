@@ -27,6 +27,11 @@
             android:process=":fileTwo" />
         <activity android:name=".ui.MessengerClientActivity" />
 
+        <activity android:name=".ui.AIDLActivity" />
+        <service
+            android:name=".service.BookManagerService"
+            android:process=":BookManagerService" />
+
         <service
             android:name=".service.MessengerService"
             android:process=":MessengerService" />

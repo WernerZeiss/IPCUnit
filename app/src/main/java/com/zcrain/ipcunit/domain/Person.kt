@@ -36,6 +36,6 @@ class Person(var name: String?, var age: Int) : Parcelable {
     }
 
     override fun toString(): String {
-        return "Person:name$name,age:$age"
+        return "Person---name:$name,age:$age"
     }
 }
