@@ -25,7 +25,7 @@ class IntentOneActivity : AppCompatActivity() {
             })
         }
 
-        findViewById<TextView>(R.id.tv_intent_send).setOnClickListener {
+        findViewById<TextView>(R.id.tv_intent_send_serial).setOnClickListener {
             startActivity(Intent(this,IntentTwoActivity::class.java).apply {
                 putExtra("student",Student("李雷",19))
             })

@@ -3,6 +3,7 @@ package com.zcrain.ipcunit.ui
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.zcrain.ipcunit.R
 import java.io.File
@@ -30,7 +31,8 @@ class FileTwoActivity : AppCompatActivity() {
         if (cacheFile.exists()) {
             val objectInputStream = ObjectInputStream(FileInputStream(cacheFile))
             val student = objectInputStream.readObject()
-            Log.d("FileTwoActivity", "student:$student")
+            Log.i("FileTwoActivity", "student:$student")
+            Toast.makeText(this, "读取文件信息：$student", Toast.LENGTH_SHORT).show()
             objectInputStream.close()
         }
     }

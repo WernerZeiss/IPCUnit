@@ -24,7 +24,15 @@ class MessengerService : Service() {
             when (msg.what) {
                 100 -> {
                     val str = msg.data.getString("msg")
-                    Log.d("MessengerService", "receive message:$str")
+                    Log.i("MessengerService", "服务端收到消息:$str")
+
+                    val client:Messenger = msg.replyTo
+                    val replyMsg = Message.obtain(null, 200)
+                    val bundle = Bundle().apply {
+                        putString("msg", "hello,i'm service")
+                    }
+                    replyMsg.data = bundle
+                    client.send(replyMsg)
                 }
                 else -> super.handleMessage(msg)
             }
