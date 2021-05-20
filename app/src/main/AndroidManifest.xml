@@ -28,6 +28,14 @@
         <activity android:name=".ui.MessengerClientActivity" />
 
         <activity android:name=".ui.AIDLActivity" />
+        <activity android:name=".ui.ProviderActivity" />
+
+        <provider
+            android:name=".provider.BookProvider"
+            android:authorities="com.zcrain.ipcunit.provider"
+            android:permission="com.zcrain.PROVIDER"
+            android:process=":BookProvider" />
+
         <service
             android:name=".service.BookManagerService"
             android:process=":BookManagerService" />

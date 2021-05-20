@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.tv_files -> startActivity(Intent(this, FileOneActivity::class.java))
             R.id.tv_messenger -> startActivity(Intent(this, MessengerClientActivity::class.java))
             R.id.tv_aidl -> startActivity(Intent(this, AIDLActivity::class.java))
-            R.id.tv_provider -> Unit
+            R.id.tv_provider -> startActivity(Intent(this, ProviderActivity::class.java))
             R.id.tv_socket -> Unit
         }
     }
