@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zcrain.ipcunit">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -29,6 +32,7 @@
 
         <activity android:name=".ui.AIDLActivity" />
         <activity android:name=".ui.ProviderActivity" />
+        <activity android:name=".ui.SocketActivity" />
 
         <provider
             android:name=".provider.BookProvider"
@@ -43,6 +47,10 @@
         <service
             android:name=".service.MessengerService"
             android:process=":MessengerService" />
+
+        <service
+            android:name=".service.SocketService"
+            android:process=":SocketService" />
     </application>
 
 </manifest>
