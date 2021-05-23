@@ -21,6 +21,9 @@ class SocketActivity : AppCompatActivity() {
     private val TAG = "SocketActivity"
     private val MESSAGE_SOCKET_CONNECTED = 1
     private val MESSAGE_RECEIVE_MSG = 2
+    private val MESSAGE_SEND_MSG = 3
+
+    private lateinit var tvMsg: TextView
 
     var mSocket: Socket? = null
     var mPrintWriter: PrintWriter? = null
@@ -28,10 +31,11 @@ class SocketActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_socket)
-
-        findViewById<TextView>(R.id.tv_socket_send).setOnClickListener {
+        tvMsg = findViewById<TextView>(R.id.tv_socket_send)
+        tvMsg.setOnClickListener {
             thread {
                 mPrintWriter?.println("你好啊")
+                mHandler.obtainMessage(MESSAGE_SEND_MSG, "你好啊").sendToTarget()
             }
         }
 
@@ -48,12 +52,24 @@ class SocketActivity : AppCompatActivity() {
             when (msg.what) {
                 MESSAGE_SOCKET_CONNECTED -> {
                     Log.i(TAG, "socket 连接成功")
+                    tvMsg.text = "服务连接成功！"
+                }
+                MESSAGE_SEND_MSG -> {
+                    Log.i(TAG, "发送消息：${msg.obj}")
+                    addMsg2Show("发送了消息：${msg.obj}")
                 }
                 MESSAGE_RECEIVE_MSG -> {
                     Log.i(TAG, "接收到服务端消息：${msg.obj}")
+                    addMsg2Show("接收到回复：${msg.obj}")
                 }
             }
         }
+    }
+
+
+    private fun addMsg2Show(msg: String) {
+        val currentMsg = tvMsg.text.toString()
+        tvMsg.text = currentMsg + "\n" + msg
     }
 
 
@@ -70,7 +86,7 @@ class SocketActivity : AppCompatActivity() {
                     )
                 mHandler.sendEmptyMessage(MESSAGE_SOCKET_CONNECTED)
             } catch (e: Exception) {
-                Log.e(TAG,"连接失败，1s后重连")
+                Log.e(TAG, "连接失败，1s后重连")
                 SystemClock.sleep(1000)
                 e.printStackTrace()
             }
@@ -82,7 +98,7 @@ class SocketActivity : AppCompatActivity() {
                 val msg = bufferReader.readLine()
                 Log.i(TAG, "读取到服务器消息：$msg")
                 if (msg != null) {
-                    mHandler.obtainMessage(MESSAGE_RECEIVE_MSG, msg)
+                    mHandler.obtainMessage(MESSAGE_RECEIVE_MSG, msg).sendToTarget()
                 }
             }
             bufferReader.close()
@@ -91,5 +107,11 @@ class SocketActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun onDestroy() {
+        mSocket?.shutdownInput()
+        mSocket?.close()
+        super.onDestroy()
     }
 }
